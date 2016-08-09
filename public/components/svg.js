@@ -1,3 +1,10 @@
+/*=========================================
+SVG Component: handles SVG render and
+passing props down from root component to
+Square component if the props exist
+=========================================*/
+
+
 import React, { Component } from 'react';
 import Square from './square';
 

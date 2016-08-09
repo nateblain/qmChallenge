@@ -1,3 +1,10 @@
+/*=========================================
+SquareForm Component: handles square input
+data for width, height, and color and
+submitting to trigger square render on SVG
+=========================================*/
+
+
 import React, { Component } from 'react';
 
 class SquareForm extends Component {
@@ -24,22 +31,25 @@ class SquareForm extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <h2>Input height, width, and color to render a square</h2>
-        <label>Square Width</label>
+        <label>Square Width:</label>
         <input
+          className="squareWidth"
           value={this.state.squareWidth}
           onChange={event => this.setState({squareWidth: event.target.value})}
           type='number'
           required
         />
-        <label>Square Height</label>
+        <label>Square Height:</label>
         <input
+          className="squareHeight"
           value={this.state.squareHeight}
           onChange={event => this.setState({squareHeight: event.target.value})}
           type='number'
           required
         />
-        <label>Square Color</label>
+        <label>Square Color (Please include the pound sign '#' for rendering hex colors):</label>
         <input
+          className="squareColor"
           value={this.state.squareColor}
           onChange={event => this.setState({squareColor: event.target.value})}
           required

@@ -1,48 +1,59 @@
 /*=========================================
 Renders Root component on the DOM.
 Root Component (App): Handles render of
-SquareForm and SVG. Holds state for
+RectangleForm and SVG. Holds state for
 width, height, and color (since Redux is not
-implemented) used by Square component passed
-through _renderSquare function called in
-SquareInput form.
+implemented) used by Rectangle component passed
+through _renderRectangle function called in
+RectangleInput form.
 =========================================*/
 
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import SquareForm from './squareInputForm';
+import RectangleForm from './rectangleInputForm';
 import SVG from './svg';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      squareWidth: '',
-      squareHeight: '',
-      squareColor: ''
+      rectangleWidth: '',
+      rectangleHeight: '',
+      rectangleColor: ''
     };
   }
 
-  _renderSquare(width, height, color) {
-    console.log(width, height, color);
-    this.setState({squareWidth: width});
-    this.setState({squareHeight: height});
-    this.setState({squareColor: color});
-    console.log(this.state.squareColor, this.state.squareHeight, this.state.squareWidth);
+  _renderRectangle(width, height, color) {
+    this.setState({rectangleWidth: width});
+    this.setState({rectangleHeight: height});
+    this.setState({rectangleColor: color});
   }
 
   render() {
     return (
-        <div>
-          <h1>SquareIt</h1>
-          <SquareForm
-            _renderSquare={this._renderSquare.bind(this)}
-          />
-          <SVG
-            squareWidth={this.state.squareWidth}
-            squareHeight={this.state.squareHeight}
-            squareColor={this.state.squareColor}/>
-        </div>
+        <section>
+          <header className='header'>
+            <h1 id="title" className='title'>SquareIt</h1>
+          </header>
+          <section id="main" className='main'>
+            <RectangleForm
+              _renderRectangle={this._renderRectangle.bind(this)}
+            />
+            <SVG
+              rectangleWidth={this.state.rectangleWidth}
+              rectangleHeight={this.state.rectangleHeight}
+              rectangleColor={this.state.rectangleColor}/>
+          </section>
+          <footer>
+            <p className="note">
+              *Note: The rectangle will render at random places on the svg canvas.
+              The entire rectangle may not always show
+              (width and height are in pixels).
+              Please use the pound sign (#) for rendering hex colors.
+            </p>
+            <p className="author">Built by Nate Blain</p>
+          </footer>
+        </section>
       );
   }
 };

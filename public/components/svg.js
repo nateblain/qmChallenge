@@ -1,47 +1,32 @@
 /*=========================================
 SVG Component: handles SVG render and
 passing props down from root component to
-Square component if the props exist
+Rectangle component if the props exist
 =========================================*/
 
 
 import React, { Component } from 'react';
-import Square from './square';
+import Rectangle from './rectangle';
 
-class SVG extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const SVG = (props) => {
 
-  // checkWidthHeight() {
-  //   console.log(this.props.squareWidth, this.props.squareHeight, this.props.squareColor);
-  //   if (this.props.squareWidth >= 10 && this.props.squareWidth <= 590 && this.props.squareHeight >= 10 && this.props.squareHeight <= 390) {
-  //     return true;
-  //   } else {
-  //     console.log('hit');
-  //     return false;
-  //   }
-  // }
-
-  render() {
-    if (!this.props.squareWidth || !this.props.squareHeight || !this.props.squareColor) {
+    if (!props.rectangleWidth || !props.rectangleHeight || !props.rectangleColor) {
       return (
-        <svg className='svg' width="600" height="400">
-        </svg>
+        <svg className='svg'></svg>
       );
     }
 
     return (
-      <svg className='svg' width="600" height="400">
-        <Square
-          squareWidth={this.props.squareWidth}
-          squareHeight={this.props.squareHeight}
-          squareColor={this.props.squareColor}
-        />
-      </svg>
+      <section className="canvas">
+        <svg className="svg">
+          <Rectangle
+            rectangleWidth={props.rectangleWidth}
+            rectangleHeight={props.rectangleHeight}
+            rectangleColor={props.rectangleColor}
+          />
+        </svg>
+      </section>
     );
-  }
 };
 
 export default SVG;

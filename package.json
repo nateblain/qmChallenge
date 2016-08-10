@@ -1,12 +1,11 @@
 {
   "name": "squareit",
   "version": "1.0.0",
-  "description": "Application for Rendering D3 Squares on an SVG",
+  "description": "Application for Rendering rectangles on an SVG",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node server/server.js",
     "dev": "nodemon server/server.js",
-    "devBuild": "webpack -d --watch",
     "build": "webpack -d",
     "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register --recursive specs/*test.js"
   },

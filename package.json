@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node server/server.js",
     "dev": "nodemon server/server.js",
-    "build": "webpack -d",
+    "devBuild": "webpack -d --watch",
+    "build": "webpack",
     "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register --recursive specs/*test.js"
   },
   "repository": {
@@ -20,7 +21,6 @@
   },
   "homepage": "https://github.com/n-9891-b/SquareIt#readme",
   "dependencies": {
-    "babel-preset-stage-1": "^6.5.0",
     "express": "^4.14.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
@@ -35,7 +35,6 @@
     "enzyme": "^2.4.1",
     "expect": "^1.20.2",
     "mocha": "^3.0.2",
-    "react-addons-test-utils": "^15.3.0",
     "react-native-mock": "^0.2.5",
     "sinon": "^1.17.5",
     "webpack": "^1.13.1",

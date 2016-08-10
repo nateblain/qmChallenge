@@ -9,7 +9,7 @@
 ## Table of Contents
 1. [Usage](#usage)
 2. [Developement](#development)
-    1. [Tech Stack](#teck-stack)
+    1. [Tech Stack](#tech-stack)
     2. [Installing Dependencies](#installing-dependencies)
     3. [Testing](#testing)
     4. [Build and Run](#build-and-run)
@@ -60,4 +60,5 @@ npm start
 ## Author Bio
 - __Nate Blain__:
   - Full-stack Software Engineer
+  - LinkedIn: https://www.linkedin.com/in/nathanielblain
   - Github profile: https://github.com/n-9891-b

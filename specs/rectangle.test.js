@@ -13,7 +13,7 @@ describe('<rectangle />', () => {
     expect(true).toEqual(true);
   });
 
-  it('renders properly', () => {
+  it('renders properly when props are past to it', () => {
     const props = {
       rectangleWidth: 50,
       rectangleHeight: 50,

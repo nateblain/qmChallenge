@@ -14,10 +14,10 @@ class RectangleForm extends Component {
       rectangleWidth: '',
       rectangleHeight: '',
       rectangleColor: ''
-    }
+    };
   }
 
-  handleSubmit(event) {
+  _handleSubmit(event) {
     event.preventDefault();
     this.props._renderRectangle(this.state.rectangleWidth, this.state.rectangleHeight, this.state.rectangleColor);
     this.setState({rectangleWidth: ''});
@@ -27,10 +27,12 @@ class RectangleForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form onSubmit={this._handleSubmit.bind(this)}>
+
         <header className="header">
           <h2>Input height, width, and color to render a rectangle*</h2>
         </header>
+
         <section className="form-field">
           <label>Rectangle Width: </label>
           <input
@@ -41,6 +43,7 @@ class RectangleForm extends Component {
             required
           />
         </section>
+
         <section className="form-field">
           <label>Rectangle Height: </label>
           <input
@@ -51,6 +54,7 @@ class RectangleForm extends Component {
             required
           />
         </section>
+
         <section className="form-field">
           <label>Rectangle Color: </label>
           <input

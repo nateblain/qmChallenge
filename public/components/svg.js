@@ -1,7 +1,7 @@
 /*=========================================
 SVG Component: handles SVG render and
 passing props down from root component to
-Rectangle component if the props exist
+Rectangle component if the props exist.
 =========================================*/
 
 

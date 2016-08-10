@@ -1,7 +1,7 @@
 /*=========================================
 Rectangle Function-based Component: handles
 rectangle rendered in the SVG component if
-width, height, and color props exist
+width, height, and color props exist.
 =========================================*/
 
 import React, { Component } from 'react';

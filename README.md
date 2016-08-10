@@ -27,7 +27,8 @@
 - SVG
 
 ####Back-end
-- Node v6.2.0 / Express
+- Node v6.2.0
+- Express
 
 ####Testing
 - Mocha

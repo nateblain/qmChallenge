@@ -1,7 +1,8 @@
 # SquareIt
 ##Application for Rendering Rectangels on an SVG.
 
->Want to see cool rectangles?! Enter width, height, and color to see them rendered on the svg canvas.
+>Want to see cool rectangles?! Enter width, height, and color to see them rendered like magic on the svg.
+
 ## Team
 
   - __Software Engineer__: Nate Blain
@@ -12,8 +13,9 @@
     1. [Tech Stack](#tech-stack)
     2. [Installing Dependencies](#installing-dependencies)
     3. [Testing](#testing)
-    4. [Build and Run](#build-and-run)
-3. [Bio](#bio)
+    4. [Build](#build)
+    5. [Build and Run](#build-and-run)
+3. [Author Bio](#author-bio)
 
 ## Usage
 >This app can be used to render rectangles on an svg.
@@ -39,26 +41,34 @@
 - Babel
 
 
-### Installing Dependencies
+###Installing Dependencies
 From within the root directory:
 
 ```sh
 npm install
 ```
 
-### Testing
+###Testing
 
 ```sh
 npm test
 ```
 
-### Build and Run
+###Build
 
+```sh
+npm run build
+```
+
+###Build and Run
 ```sh
 npm start
 ```
+Then navigate to http://localhost:8000
 
-## Author Bio
+For all other npm scripts, please check the package.json file in the root directory.
+
+##Author Bio
 - __Nate Blain__:
   - Full-stack Software Engineer
   - LinkedIn: https://www.linkedin.com/in/nathanielblain

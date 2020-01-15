@@ -8,13 +8,21 @@ through _renderRectangle function called in
 RectangleInput form.
 =========================================*/
 
-import React, { Component } from 'react';
-import ReactDom from 'react-dom';
-import RectangleForm from './rectangleInputForm';
-import SVG from './svg';
+import React, { Component } from 'react'
+import RectangleForm from './rectangleInputForm.tsx';
+import SVG from './svg.tsx';
+import '../styles/main.css';
 
-class App extends Component {
-  constructor(props) {
+interface State {
+  rectangleWidth: string;
+  rectangleHeight: string;
+  rectangleColor: string;
+}
+
+export interface Props {}
+
+class App extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       rectangleWidth: '',
@@ -23,7 +31,7 @@ class App extends Component {
     };
   }
 
-  _renderRectangle(width, height, color) {
+  _renderRectangle(width: string, height: string, color: string) {
     this.setState({rectangleWidth: width});
     this.setState({rectangleHeight: height});
     this.setState({rectangleColor: color});

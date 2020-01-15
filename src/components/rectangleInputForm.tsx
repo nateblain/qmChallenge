@@ -7,8 +7,18 @@ submitting to trigger rectangle render on SVG
 
 import React, { Component } from 'react';
 
-class RectangleForm extends Component {
-  constructor(props) {
+interface Props {
+  _renderRectangle: (arg0: string, arg1: string, arg2: string) => undefined;
+}
+
+interface State {
+  rectangleWidth: string;
+  rectangleHeight: string;
+  rectangleColor: string;
+}
+
+class RectangleForm extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       rectangleWidth: '',
@@ -17,7 +27,7 @@ class RectangleForm extends Component {
     };
   }
 
-  _handleSubmit(event) {
+  _handleSubmit(event: MouseEvent) {
     event.preventDefault();
     this.props._renderRectangle(this.state.rectangleWidth, this.state.rectangleHeight, this.state.rectangleColor);
     this.setState({rectangleWidth: ''});

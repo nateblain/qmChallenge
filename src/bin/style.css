@@ -1,0 +1,79 @@
+/*=========================================
+Page Styling
+=========================================*/
+
+/*Header and title styling*/
+.header {
+  color: #607d8b;
+  text-align: center;
+}
+
+#title {
+  border: 1px solid #607d8b;
+  border-left: none;
+  border-right: none;
+}
+
+.title {
+  font-size: 50px;
+  font-style: italic;
+}
+
+/*Main Section Styling*/
+.main {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+/*Form Styling*/
+form {
+  float: left;
+  margin-right: 10px;
+  text-align: center;
+  width: 200px;
+}
+
+.form-field {
+  margin: 5px auto;
+  font-size: 18px;
+}
+
+/*Form Input Styling*/
+.input-field {
+  display: block;
+  border: 2px solid #607d8b;
+  height: 20px;
+  font-size: 18px;
+}
+
+/*Button Styling*/
+button.submit {
+  margin-top: 5px;
+  background-color: #607d8b;
+  color: white;
+  width: 150px;
+  font-size: 20px;
+}
+
+/*SVG Styling*/
+.svg {
+  border: 1px solid #607d8b;
+  width: 800px;
+  height: 600px;
+}
+
+/*Footer Styling*/
+footer {
+  margin: 0 auto;
+  width: 1100px;
+  text-align: center;
+}
+
+.note {
+  font-style: italic;
+}
+
+.author {
+  font-size: 12px;
+}
+

@@ -6,9 +6,15 @@ Rectangle component if the props exist.
 
 
 import React, { Component } from 'react';
-import Rectangle from './rectangle';
+import Rectangle from './rectangle.tsx';
 
-const SVG = (props) => {
+interface Props {
+  rectangleWidth: string;
+  rectangleHeight: string;
+  rectangleColor: string;
+}
+
+const SVG = (props: Props) => {
 
     if (!props.rectangleWidth || !props.rectangleHeight || !props.rectangleColor) {
       return (
@@ -30,5 +36,3 @@ const SVG = (props) => {
 };
 
 export default SVG;
-
-

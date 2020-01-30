@@ -6,7 +6,7 @@ Rectangle component if the props exist.
 
 
 import React, { Component } from 'react';
-import Rectangle from './rectangle.tsx';
+import Rectangle from './rectangle';
 
 interface Props {
   rectangleWidth: string;

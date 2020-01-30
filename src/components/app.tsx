@@ -9,8 +9,10 @@ RectangleInput form.
 =========================================*/
 
 import React, { Component } from 'react'
-import RectangleForm from './rectangleInputForm.tsx';
-import SVG from './svg.tsx';
+import RectangleForm from './rectangleInputForm';
+import SVG from './svg';
+import FeedBack from './FeedBack';
+
 import '../styles/main.css';
 
 interface State {
@@ -52,6 +54,9 @@ class App extends Component<Props, State> {
               rectangleHeight={this.state.rectangleHeight}
               rectangleColor={this.state.rectangleColor}/>
           </section>
+          <div>
+            <FeedBack />
+          </div>
           <footer>
             <p className="note">
               *Note: The rectangle will render at random places on the svg canvas.

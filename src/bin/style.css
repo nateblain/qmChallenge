@@ -77,3 +77,26 @@ footer {
   font-size: 12px;
 }
 
+
+/* test stuff */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-area {
+  width: 300px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.search-term {
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.checkbox-container {
+
+}
+

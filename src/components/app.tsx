@@ -1,73 +1,140 @@
-/*=========================================
-Renders Root component on the DOM.
-Root Component (App): Handles render of
-RectangleForm and SVG. Holds state for
-width, height, and color (since Redux is not
-implemented) used by Rectangle component passed
-through _renderRectangle function called in
-RectangleInput form.
-=========================================*/
+import React, { Component, ChangeEvent, ErrorInfo } from 'react'
+import { cloneDeep } from 'lodash';
 
-import React, { Component } from 'react'
-import RectangleForm from './rectangleInputForm';
-import SVG from './svg';
-import FeedBack from './FeedBack';
+import CardContainer from './CardContainer';
+import Actions from './Actions';
+import Result from './Result';
+
+import { buildQuery } from '../utils/utils';
+
+import { fields, operators } from '../staticAssets';
+import { CriteriaType } from '../DomainTypes';
 
 import '../styles/main.css';
 
+const defaultCriteriaRow = {
+  fieldId: "",
+  operatorId: "",
+  values: new Array<string>()
+};
+
 interface State {
-  rectangleWidth: string;
-  rectangleHeight: string;
-  rectangleColor: string;
+  generatedQuery: string,
+  criteria: Array<CriteriaType>,
 }
 
-export interface Props {}
-
-class App extends Component<Props, State> {
-  constructor(props: Props) {
+class App extends Component<{}, State> {
+  constructor(props: {}) {
     super(props);
     this.state = {
-      rectangleWidth: '',
-      rectangleHeight: '',
-      rectangleColor: ''
-    };
+        criteria: [cloneDeep(defaultCriteriaRow)],
+        generatedQuery: "",
+    }
   }
 
-  _renderRectangle(width: string, height: string, color: string) {
-    this.setState({rectangleWidth: width});
-    this.setState({rectangleHeight: height});
-    this.setState({rectangleColor: color});
+  handleFieldSelect = (id: string, idx: number) => {
+    const { criteria } = this.state
+    const field = fields.find(field => field.id === id);
+    const operator = operators.find(op => op.id === criteria[idx].operatorId);
+    if (field) {
+      if (operator) {
+        const isOperatorTypeMatching = operator.type === field.type
+        if (!isOperatorTypeMatching) {
+          criteria[idx].operatorId = "";
+        }
+      }
+      criteria[idx].fieldId = field.id;
+
+      this.setState({ criteria: [...criteria] })
+    }
+  }
+
+  handleOperatorSelect = (id: string, idx: number) => {
+    const { criteria } = this.state
+    const operator = operators.find(operator => operator.id === id);
+    if (operator) {
+      criteria[idx].operatorId = operator.id;
+      this.setState({ criteria: [...criteria] })
+    }
+  }
+
+  handleValueChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    idx: number,
+    valueIdx: number
+  ) => {
+    const { criteria } = this.state;
+    const { value } = event.target
+    criteria[idx].values[valueIdx] = value;
+    this.setState({ criteria: [...criteria] });
+  }
+
+  handleSearch = () => {
+    this.setState({
+      generatedQuery: buildQuery(this.state.criteria)
+    });
+  }
+
+  isCriteriaRowAddable = () => {
+    const { criteria } = this.state;
+    // this is tottally wrong
+    const current = criteria[criteria.length - 1];
+    return current.fieldId && current.operatorId && current.values[0];
+  }
+
+  addCriteriaRow = () => {
+    const { criteria } = this.state;
+    this.setState({ criteria: [...criteria, cloneDeep(defaultCriteriaRow)] });
+  }
+
+  removeCard = (idx: number) => {
+    const { criteria } = this.state;
+    if (idx === 0 && criteria.length === 1) {
+      this.handleReset();
+    } else {
+      criteria.splice(idx, 1);
+      this.setState({ criteria: [...criteria] });
+    }
+  }
+
+  handleReset = () => {
+    this.setState({
+      generatedQuery: "",
+      criteria: [cloneDeep(defaultCriteriaRow)]
+    });
   }
 
   render() {
+    const { generatedQuery, criteria } = this.state;
+
     return (
-        <section>
-          <header className='header'>
-            <h1 id="title" className='title'>SquareIt</h1>
-          </header>
-          <section id="main" className='main'>
-            <RectangleForm
-              _renderRectangle={this._renderRectangle.bind(this)}
-            />
-            <SVG
-              rectangleWidth={this.state.rectangleWidth}
-              rectangleHeight={this.state.rectangleHeight}
-              rectangleColor={this.state.rectangleColor}/>
-          </section>
-          <div>
-            <FeedBack />
+      <div className="appContainer">
+        <div className="mainContainer">
+          <div className="title">Search for Sessions</div>
+          <CardContainer
+            criteria={criteria}
+            handleFieldSelect={this.handleFieldSelect}
+            handleOperatorSelect={this.handleOperatorSelect}
+            handleValueChange={this.handleValueChange}
+            removeCard={this.removeCard}
+          />
+          <div className="addButtonContainer">
+            <button
+              className="addButton"
+              disabled={!this.isCriteriaRowAddable()}
+              onClick={this.addCriteriaRow}
+            >
+              And
+            </button>
           </div>
-          <footer>
-            <p className="note">
-              *Note: The rectangle will render at random places on the svg canvas.
-              The entire rectangle may not always show
-              (width and height are in pixels).
-              Please use the pound sign (#) for rendering hex colors.
-            </p>
-            <p className="author">Built by Nate Blain</p>
-          </footer>
-        </section>
-      );
+          <Actions
+            buildQuery={this.handleSearch}
+            handleReset={this.handleReset}
+          />
+          <Result generatedQuery={generatedQuery} />
+        </div>
+      </div>
+    );
   }
 };
 

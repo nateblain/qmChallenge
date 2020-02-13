@@ -1,34 +1,30 @@
 {
-  "name": "squareit",
+  "name": "qmCodeChallenge",
   "version": "1.0.0",
-  "description": "Application for Rendering rectangles on an SVG",
-  "main": "index.js",
+  "description": "Quantum Metric Code Challenge",
+  "main": "index.tsx",
   "scripts": {
     "start": "npm run build && node server/server.js",
-    "dev": "nodemon server/server.js",
-    "devBuild": "webpack -d --watch",
-    "build": "webpack --mode production",
+    "start:dev": "nodemon server/server.js",
+    "build:dev": "webpack -d --watch",
+    "build": "webpack",
     "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register --recursive specs/*test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/n-9891-b/SquareIt.git"
   },
   "author": "Nate Blain",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/n-9891-b/SquareIt/issues"
-  },
-  "homepage": "https://github.com/n-9891-b/SquareIt#readme",
   "dependencies": {
-    "@types/d3": "^5.7.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@types/lodash": "^4.14.149",
     "@types/node": "^13.1.7",
+    "@types/uuid": "^3.4.7",
     "css-loader": "^3.4.2",
-    "d3": "^5.15.0",
     "express": "^4.17.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-root-plugin": "^0.10.0",
+    "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.9.0",
     "nodemon": "^2.0.2",
     "react": "^16.12.0",
@@ -38,7 +34,8 @@
     "style-loader": "^1.1.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
-    "typings": "^2.1.1"
+    "typings": "^2.1.1",
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
@@ -47,10 +44,6 @@
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "babel-loader": "^8.0.6",
-    "enzyme": "^2.4.1",
-    "expect": "^1.20.2",
-    "mocha": "^7.0.0",
-    "sinon": "^1.17.5",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"

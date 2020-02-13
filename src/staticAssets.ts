@@ -2,6 +2,8 @@ import uuidv1 from 'uuid';
 
 import { FieldType } from './DomainTypes';
 
+const BETWEEN = "BETWEEN";
+
 const genericNumberBuilder = (predicate: Array<string>, columnName: string, operator: string) =>
   ` ${columnName} ${operator} ${predicate[0]}`
 
@@ -107,7 +109,7 @@ const operators = [
   {
     id: uuidv1(),
     displayName: "between",
-    operatorValue: "BETWEEN",
+    operatorValue: BETWEEN,
     builder: (numbers: Array<string>, columnName: string) =>
       ` ${columnName} BETWEEN ${numbers[0]} AND ${numbers[1]}`,
     type: FieldType.NUMBER,
@@ -140,4 +142,5 @@ const operators = [
 export {
   fields,
   operators,
+  BETWEEN
 }

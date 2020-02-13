@@ -1,6 +1,8 @@
 import { fields, operators } from '../staticAssets';
 
-import { CriteriaType } from '../DomainTypes';
+import { CriteriaType, FieldType } from '../DomainTypes';
+
+const integerErrorMsg = "One or more search criteria have an integer operator but the value is a string. Adjust the value to be a valid integer."
 
 const hasNoSearchParameters = (criteria: Array<CriteriaType>) => {
   const firstCriteria = criteria[0];
@@ -27,15 +29,24 @@ const buildQuery = (criteria: Array<CriteriaType>) => {
     return `${baseQuery};`;
   }
   if (isPartialSearch(criteria)) {
-    // still need to handle this
-    console.log("Search must have all valid values");
-    return;
+    return "One or more values are missing from the search criteria. Make sure all fields have values.";
   }
 
   const query = criteria.reduce((acc, cur, idx) => {
     const field = fields.find(field => field.id === cur.fieldId);
     const operator = operators.find(operator => operator.id === cur.operatorId);
+    if (acc === integerErrorMsg) {
+      return integerErrorMsg;
+    }
+
     if (operator && field) {
+
+      if (field.type === FieldType.NUMBER) {
+        const foundNaN = cur.values.map(v => parseInt(v)).find(v => isNaN(v));
+        if (foundNaN !== undefined && isNaN(foundNaN)) {
+          return integerErrorMsg;
+        }
+      }
 
       if (idx === 0) {
         acc = `${acc} WHERE`;

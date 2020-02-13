@@ -44,7 +44,6 @@ module.exports = {
       template: './src/index.html',
       inject: 'body',
       filename: './index.html',
-      title: 'Square It',
       hash: true
     }),
     new HtmlWebpackRootPlugin(),

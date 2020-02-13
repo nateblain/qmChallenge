@@ -1,75 +1,64 @@
-# SquareIt
-##Application for Rendering Rectangels on an SVG.
+### Quantum Metric Code Challenge
 
->Want to see cool rectangles?! Enter width, height, and color to see them rendered like magic on the svg.
+##### Author
 
-## Team
-
-  - __Software Engineer__: Nate Blain
+  - Nate Blain
 
 ## Table of Contents
 1. [Usage](#usage)
-2. [Developement](#development)
+2. [Development](#development)
     1. [Tech Stack](#tech-stack)
     2. [Installing Dependencies](#installing-dependencies)
-    3. [Testing](#testing)
-    4. [Build](#build)
-    5. [Build and Run](#build-and-run)
+    3. [Build](#build)
+    4. [Build and Run](#build-and-run)
 3. [Author Bio](#author-bio)
 
 ## Usage
->This app can be used to render rectangles on an svg.
+>This application allows you to build SQL Statements for a session table.
 
-## Development
+### Tech Stack
 
-###Tech Stack
-
-####Front-end
+#### Front-end (Main Libraries, Frameworks)
 - React
-- SVG
+- Typescript
 
-####Back-end
-- Node v6.2.0
-- Express
 
-####Testing
-- Mocha
-- Enzyme
+#### Back-end
+- Node v12.14.1
+- Express v4.17.1
 
-####Build Tools
+#### Build Tools
 - Webpack
 - Babel
 
 
-###Installing Dependencies
-From within the root directory:
+### Installing Dependencies
+From the root directory:
 
-```sh
-npm install
-```
+```npm install```
 
-###Testing
+### Build
 
-```sh
-npm test
-```
+```npm run build```
 
-###Build
+### Build Dev
 
-```sh
-npm run build
-```
+```npm run build:dev```
 
-###Build and Run
-```sh
-npm start
-```
+### Run dev
+
+```npm run start:dev```
+
+### Build and Run
+
+```npm start```
+
 Then navigate to http://localhost:8000
 
 For all other npm scripts, please check the package.json file in the root directory.
 
 ##Author Bio
 - __Nate Blain__:
-  - Full-stack Software Engineer
+  - Software Engineer
   - LinkedIn: https://www.linkedin.com/in/nathanielblain
   - Github profile: https://github.com/n-9891-b

@@ -5,7 +5,7 @@ const Result = (props: { generatedQuery: string }) => (
     <div className="resultInfo">
       Your Generated SQL Statement goes here:
     </div>
-    <div>
+    <div className="query">
       {props.generatedQuery}
     </div>
   </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 import DropdownOptions from './DropdownOptions';
 
@@ -27,6 +27,7 @@ const Select = (props: SelectProps) => {
   } = props;
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showTooltip, setShowTootip] = useState(false);
 
   const handleSelectorClick = () => {
     if (disabled !== true) {
@@ -34,17 +35,35 @@ const Select = (props: SelectProps) => {
     }
   }
 
+  const handleMouseOverOut = () => {
+    if (disabled) {
+      setShowTootip(!showTooltip);
+    }
+  }
+
   return (
     <div
       onClick={handleSelectorClick}
       className="selector"
+      onMouseOver={handleMouseOverOut}
+      onMouseOut={handleMouseOverOut}
     >
+      {showTooltip ?
+        <div className="tooltip">
+          Operator is disabled because the search field has not yet been set.
+        </div> : null}
       <div className="selectedDisplayContainer">
         <div className="selectedDisplay">
-          { currentValue === NOT_FOUND ? "Select an value..." : currentValue.displayName}
+          { currentValue === NOT_FOUND ?
+            <p className="defaultSelector">
+              Select a value...
+            </p> : currentValue.displayName}
         </div>
         <div>
-          <FontAwesomeIcon icon={faChevronDown} size="xs" />
+          <FontAwesomeIcon
+            icon={isDropdownOpen ? faChevronUp : faChevronDown}
+            size="xs"
+          />
         </div>
       </div>
       {isDropdownOpen ?

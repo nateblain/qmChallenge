@@ -1,13 +1,13 @@
-import React, { Component, ChangeEvent, ErrorInfo } from 'react'
+import React, { Component, ChangeEvent } from 'react'
 import { cloneDeep } from 'lodash';
 
 import CardContainer from './CardContainer';
-import Actions from './Actions';
+import ActionButtons from './ActionButtons';
 import Result from './Result';
 
 import { buildQuery } from '../utils/utils';
 
-import { fields, operators } from '../staticAssets';
+import { fields, operators, BETWEEN } from '../staticAssets';
 import { CriteriaType } from '../DomainTypes';
 
 import '../styles/main.css';
@@ -21,14 +21,16 @@ const defaultCriteriaRow = {
 interface State {
   generatedQuery: string,
   criteria: Array<CriteriaType>,
+  addSearchTermDisabled: boolean,
 }
 
 class App extends Component<{}, State> {
   constructor(props: {}) {
     super(props);
     this.state = {
-        criteria: [cloneDeep(defaultCriteriaRow)],
-        generatedQuery: "",
+      criteria: [cloneDeep(defaultCriteriaRow)],
+      generatedQuery: "",
+      addSearchTermDisabled: true,
     }
   }
 
@@ -46,6 +48,7 @@ class App extends Component<{}, State> {
       criteria[idx].fieldId = field.id;
 
       this.setState({ criteria: [...criteria] })
+      this.isCriteriaRowAddable([...criteria]);
     }
   }
 
@@ -55,6 +58,7 @@ class App extends Component<{}, State> {
     if (operator) {
       criteria[idx].operatorId = operator.id;
       this.setState({ criteria: [...criteria] })
+      this.isCriteriaRowAddable([...criteria]);
     }
   }
 
@@ -67,24 +71,38 @@ class App extends Component<{}, State> {
     const { value } = event.target
     criteria[idx].values[valueIdx] = value;
     this.setState({ criteria: [...criteria] });
+    this.isCriteriaRowAddable([...criteria]);
   }
 
   handleSearch = () => {
-    this.setState({
-      generatedQuery: buildQuery(this.state.criteria)
-    });
+    this.setState({ generatedQuery: buildQuery(this.state.criteria)});
   }
 
-  isCriteriaRowAddable = () => {
-    const { criteria } = this.state;
-    // this is tottally wrong
-    const current = criteria[criteria.length - 1];
-    return current.fieldId && current.operatorId && current.values[0];
+  isCriteriaRowAddable = (criteria: Array<CriteriaType>) => {
+    const foundSearchTerm = criteria.find((term) => {
+      if (term.operatorId) {
+        const operator = operators.find(op => op.id === term.operatorId);
+        const isBetweenOperatorType = operator.operatorValue === BETWEEN;
+        if (isBetweenOperatorType) {
+            return !term.fieldId || !term.operatorId || !term.values[0] || !term.values[1];
+        }
+        return !term.fieldId || !term.operatorId || !term.values[0];
+      }
+      return !term.fieldId || !term.operatorId || !term.values[0];
+    });
+
+    if (foundSearchTerm) {
+      this.setState({ addSearchTermDisabled: true });
+    } else {
+      this.setState({ addSearchTermDisabled: false });
+    }
   }
 
   addCriteriaRow = () => {
     const { criteria } = this.state;
-    this.setState({ criteria: [...criteria, cloneDeep(defaultCriteriaRow)] });
+    const newCriteria = [...criteria, cloneDeep(defaultCriteriaRow)];
+    this.setState({ criteria: newCriteria });
+    this.isCriteriaRowAddable(newCriteria);
   }
 
   removeCard = (idx: number) => {
@@ -94,19 +112,20 @@ class App extends Component<{}, State> {
     } else {
       criteria.splice(idx, 1);
       this.setState({ criteria: [...criteria] });
+      this.isCriteriaRowAddable([...criteria]);
     }
   }
 
   handleReset = () => {
     this.setState({
       generatedQuery: "",
-      criteria: [cloneDeep(defaultCriteriaRow)]
+      criteria: [cloneDeep(defaultCriteriaRow)],
+      addSearchTermDisabled: true
     });
   }
 
   render() {
-    const { generatedQuery, criteria } = this.state;
-
+    const { generatedQuery, criteria, addSearchTermDisabled } = this.state;
     return (
       <div className="appContainer">
         <div className="mainContainer">
@@ -121,13 +140,13 @@ class App extends Component<{}, State> {
           <div className="addButtonContainer">
             <button
               className="addButton"
-              disabled={!this.isCriteriaRowAddable()}
+              disabled={addSearchTermDisabled}
               onClick={this.addCriteriaRow}
             >
               And
             </button>
           </div>
-          <Actions
+          <ActionButtons
             buildQuery={this.handleSearch}
             handleReset={this.handleReset}
           />

@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 interface ActionButtonsProps {
-  buildQuery: () => void,
-  handleReset: () => void
+  buildQuery: () => void;
+  handleReset: () => void;
+  handleChartReset: () => void;
 }
 
 const ActionButtons = (props: ActionButtonsProps) => (
@@ -16,7 +17,12 @@ const ActionButtons = (props: ActionButtonsProps) => (
       </div>
       <div>Search</div>
     </div>
-    <div className="resetButton" onClick={props.handleReset}>Reset</div>
+    <div className="resetButton" onClick={props.handleReset}>
+      Reset Query
+    </div>
+    <div className="resetButton" onClick={props.handleChartReset}>
+      Reset Chart
+    </div>
   </div>
 );
 

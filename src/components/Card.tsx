@@ -1,27 +1,27 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent } from "react";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import Select from './Select';
-import ValueInputs from './ValueInputs';
+import Select from "./Select";
+import ValueInputs from "./ValueInputs";
 
-import { fields, operators } from '../data/staticData';
-import { Field, Operator, CriteriaType } from '../types/DomainTypes';
+import { fields, operators } from "../data/staticData";
+import { Field, Operator, CriteriaType } from "../types/DomainTypes";
 
 interface CardProps {
-  idx: number,
-  field: Field,
-  operator: Operator,
-  item: CriteriaType,
-  handleFieldSelect: (id: string, idx: number) => void,
-  handleOperatorSelect: (id: string, idx: number) => void,
+  idx: number;
+  field?: Field;
+  operator?: Operator;
+  item: CriteriaType;
+  handleFieldSelect: (id: string, idx: number) => void;
+  handleOperatorSelect: (id: string, idx: number) => void;
   handleValueChange: (
     event: ChangeEvent<HTMLInputElement>,
     idx: number,
     valueIdx: number
-  ) => void,
-  removeCard: (idx: number) => void
+  ) => void;
+  removeCard: (idx: number) => void;
 }
 
 const Card = (props: CardProps) => {
@@ -33,9 +33,11 @@ const Card = (props: CardProps) => {
     handleFieldSelect,
     handleOperatorSelect,
     handleValueChange,
-    removeCard
+    removeCard,
   } = props;
-  const filteredOperators = field ? operators.filter(op => op.type === field.type) : [];
+  const filteredOperators = field
+    ? operators.filter((op) => op.type === field.type)
+    : [];
   const disabled = !field;
 
   return (
@@ -64,6 +66,6 @@ const Card = (props: CardProps) => {
       />
     </div>
   );
-}
+};
 
 export default Card;

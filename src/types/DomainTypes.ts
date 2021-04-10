@@ -1,32 +1,41 @@
-enum FieldType {
+export enum FieldType {
   STRING,
-  NUMBER
+  NUMBER,
 }
 
-interface Field {
-  id: string,
-  displayName: string,
-  columnName: string,
-  type: FieldType
+export interface Field {
+  id: string;
+  displayName: string;
+  columnName: string;
+  type: FieldType;
 }
 
-interface Operator {
-  id: string,
-  displayName: string,
-  operatorValue: string,
-  builder: (predicate: Array<string>, columnName: string, operator: string) => string
-  type: FieldType,
+export interface Operator {
+  id: string;
+  displayName: string;
+  operatorValue: string;
+  builder: (
+    predicate: Array<string>,
+    columnName: string,
+    operator: string,
+  ) => string;
+  type: FieldType;
 }
 
-interface CriteriaType {
-  fieldId: string,
-  operatorId: string,
-  values: Array<string>
+export interface CriteriaType {
+  fieldId: string;
+  operatorId: string;
+  values: Array<string>;
 }
 
-export {
-  Field,
-  Operator,
-  FieldType,
-  CriteriaType
+export interface SessionChartData {
+  id: string;
+  displayName: string;
+  columnName: string;
+  count: number;
+}
+
+export interface Chart {
+  buildBarChart: (sessionChartData: SessionChartData[]) => void;
+  updateChart: (sessionChartData: SessionChartData[]) => void;
 }

@@ -1,22 +1,33 @@
 {
   "compilerOptions": {
-    "outDir": "./src/bin",
+    "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "commonjs",
-    "target": "es5",
+    "sourceMap": true,
+    "module": "esnext",
+    "target": "es6",
     "jsx": "react",
-    "allowJs": true,
     "preserveConstEnums": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": [ "node" ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-    "lib": ["es6", "dom"],
+    "types": ["node"],
+    "lib": ["es2019", "es6", "dom"],
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": ["jest"],
+    "typeRoots": ["node_modules/@types", "global.d.ts", "./types"],
+    "allowJs": true
   },
+  "exclude": ["./node_modules", ".eslintrc.js", "./src/astrouxds/**/*"],
   "include": [
-    "./src/**/*"
-  ],
+    "./src/**/*.tsx",
+    "./src/**/*.ts",
+    "webpack.config.js",
+    "types/**/*.ts",
+    "global.d.ts"
+  ]
 }

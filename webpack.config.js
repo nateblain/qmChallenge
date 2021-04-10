@@ -1,58 +1,65 @@
 const path = require('path');
 
-const htmlWebpackPlugin = require('html-webpack-plugin')
-const HtmlWebpackRootPlugin = require('html-webpack-root-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
-  entry: {
-    main: './src/index.tsx',
-    vendor: ['react', 'react-dom']
-  },
-  output: {
-    path: path.resolve(__dirname, 'src/bin'),
-    filename: '[name].bundle.js'
-  },
-  module: {
-    rules : [
-      {
+const config = (env) => {
+  const outputPath = { path: path.resolve(__dirname, 'src/bin') };
+
+  return {
+    entry: {
+      main: './src/index.tsx',
+    },
+    output: {
+      ...outputPath,
+      publicPath: '/',
+      filename: '[name].bundle.js',
+    },
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          sourceMap: true,
+        }),
+      ],
+    },
+    devtool: env.production ? false : 'inline-source-map',
+    module: {
+      rules: [
+        {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
           use: [
-              {
-                  loader: "ts-loader"
-              }
-          ]
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader"
-          }
-        ]
-      },
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      }
-    ]
-  },
-  // Plugins
-  plugins: [
-    new htmlWebpackPlugin({
-      template: './src/index.html',
-      inject: 'body',
-      filename: './index.html',
-      hash: true
-    }),
-    new HtmlWebpackRootPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "style.css"
-    })
-  ],
-  mode: 'development',
-  resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
-  },
+            {
+              loader: 'ts-loader',
+            },
+          ],
+        },
+        {
+          test: /\.(s?)css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.(svg|woff|woff2|ttf|png|eot)$/,
+          use: ['file-loader'],
+        },
+      ],
+    },
+    // Plugins
+    plugins: [
+      new MiniCssExtractPlugin(),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        inject: 'body',
+        filename: './index.html',
+        hash: true,
+      }),
+    ],
+    mode: env.production ? 'production' : 'development',
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
+    },
+  };
 };
+
+module.exports = config;
